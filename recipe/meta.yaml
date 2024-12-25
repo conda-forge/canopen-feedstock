@@ -6,23 +6,23 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/canopen-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/canopen-{{ version }}.tar.gz
   sha256: 792084a93c138d5b2a406ddd2d4eb5ce208f03bd8fda60f81ad2bb8d56c6b827
 
 build:
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
-  number: 0
+  number: 1
 
 requirements:
   host:
-    - python >=3.6
+    - python {{ python_min }}
     - setuptools >=45
     - wheel
     - setuptools-scm >=6.2
     - pip
   run:
-    - python >=3.6
+    - python >={{ python_min }}
     - python-can >=3.0.0
 
 test:
@@ -33,6 +33,7 @@ test:
   requires:
     - pip
     - msgpack-python
+    - python {{ python_min }}
 
 about:
   home: https://github.com/christiansandberg/canopen
