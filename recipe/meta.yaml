@@ -1,5 +1,5 @@
 {% set name = "canopen" %}
-{% set version = "2.3.0" %}
+{% set version = "2.4.1" %}
 
 package:
   name: {{ name|lower }}
@@ -7,12 +7,12 @@ package:
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/canopen-{{ version }}.tar.gz
-  sha256: 792084a93c138d5b2a406ddd2d4eb5ce208f03bd8fda60f81ad2bb8d56c6b827
+  sha256: 20a84bc498b34dadd79cece467d3bbe19591c1c02a8f39331bcc6065c4d8b2eb
 
 build:
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
-  number: 2
+  number: 0
 
 requirements:
   host:
@@ -24,7 +24,7 @@ requirements:
   run:
     - python >={{ python_min }}
     - python-can >=3.0.0
-    - msgpack-python >=1.0.0,<1.1
+    - msgpack-python >=1.1.0,<1.2
 
 test:
   imports:
