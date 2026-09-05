@@ -1,0 +1,49 @@
+schema_version: 1
+
+context:
+  name: canopen
+  version: "2.4.1"
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://pypi.org/packages/source/${{ name[0] }}/${{ name }}/canopen-${{ version }}.tar.gz
+  sha256: 20a84bc498b34dadd79cece467d3bbe19591c1c02a8f39331bcc6065c4d8b2eb
+
+build:
+  number: 1
+  noarch: python
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+
+requirements:
+  host:
+    - python ${{ python_min }}.*
+    - setuptools >=45
+    - wheel
+    - setuptools-scm >=6.2
+    - pip
+  run:
+    - python >=${{ python_min }}
+    - python-can >=3.0.0
+    - msgpack-python >=1.1.0,<1.2
+
+tests:
+  - python:
+      imports:
+        - canopen
+      pip_check: false
+      python_version:
+        - ${{ python_min }}
+        - "*"
+
+about:
+  summary: CANopen stack implementation
+  license: MIT
+  license_file: LICENSE.txt
+  homepage: https://github.com/christiansandberg/canopen
+
+extra:
+  recipe-maintainers:
+    - jan-janssen
